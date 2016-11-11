@@ -1,0 +1,46 @@
+{
+  "name": "hrbac",
+  "version": "0.0.1",
+  "description": "Hierarchical Role-based Access Control",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp t"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/f12/rbac.git"
+  },
+  "keywords": [
+    "rbac",
+    "hrbac"
+  ],
+  "author": "Chris Abrams <mail@chrisabrams.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/f12/rbac/issues"
+  },
+  "homepage": "https://github.com/f12/rbac#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2017": "^6.16.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.9.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "babel-runtime": "^6.18.0"
+  }
+}
