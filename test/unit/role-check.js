@@ -80,8 +80,8 @@ describe('Role Check', function() {
 
     const rbac = new RBAC({
       rules: [
-        {a: 'user', canDo: 'say hello', when: await function sayHelloWhen() {
-          return true
+        {a: 'user', canDo: 'say hello', when: function sayHelloWhen() {
+          return Promise.resolve(true)
         }}
       ]
     })
@@ -97,7 +97,7 @@ describe('Role Check', function() {
     const rbac = new RBAC({
       rules: [
         {a: 'user', canDo: 'say hello', when: await function sayHelloWhen() {
-          return false
+          return Promise.resolve(false)
         }}
       ]
     })
@@ -112,7 +112,7 @@ describe('Role Check', function() {
 
     const rbac = new RBAC({
       rules: [
-        {a: 'user', canDo: 'say hello', when: await function sayHelloWhen(params = {}) {
+        {a: 'user', canDo: 'say hello', when: function sayHelloWhen(params = {}) {
           return params.world
         }}
       ]
@@ -128,7 +128,7 @@ describe('Role Check', function() {
 
     const rbac = new RBAC({
       rules: [
-        {a: 'user', canDo: 'say hello', when: await function sayHelloWhen(params = {}) {
+        {a: 'user', canDo: 'say hello', when: function sayHelloWhen(params = {}) {
           return params.world
         }}
       ]

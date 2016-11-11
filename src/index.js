@@ -2,41 +2,38 @@ class RBAC {
 
   constructor(options = {}) {
 
+    this.flattenedRules = options.flattenedRules || []
     this.rules = options.rules || []
 
   }
 
-  check(role, action, options = {}) {
+  async check(role, action, options = {}) {
 
     let result = false
 
-    return new Promise( async (resolve, reject) => {
+    const roles = (this.flattenRules.length > 0) ? this.flattenRules : this.flattenRules(this.rules)
 
-      const roles = this.flattenRules(this.rules)
+    if(roles[role]) {
 
-      if(roles[role]) {
+      for(let i = 0, l = roles[role].length; i < l; i++) {
+        const r = roles[role][i]
 
-        for(let i = 0, l = roles[role].length; i < l; i++) {
-          const r = roles[role][i]
+        if(r.canDo == action) {
 
-          if(r.canDo == action) {
-
-            if(r.when) {
-              result = await r.when(options)
-            }
-
-            else {
-              result = true
-            }
-
+          if(r.when) {
+            result = await r.when(options)
           }
-        }
 
+          else {
+            result = true
+          }
+
+        }
       }
 
-      resolve(result)
+    }
 
-    })
+    return result
 
   }
 
@@ -79,4 +76,4 @@ class RBAC {
 
 }
 
-export default RBAC
+module.exports = RBAC
