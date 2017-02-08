@@ -41,6 +41,11 @@ class RBAC {
 
       }
 
+      // No need to check other roles
+      if(result) {
+        break
+      }
+
     }
 
     return result
