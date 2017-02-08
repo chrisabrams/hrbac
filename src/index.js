@@ -13,22 +13,32 @@ class RBAC {
 
     const roles = (this.flattenRules.length > 0) ? this.flattenRules : this.flattenRules(this.rules)
 
-    if(roles[role]) {
+    // Make sure a list of roles can be passed
+    if(!(role instanceof Array)) {
+      role = [role]
+    }
 
-      for(let i = 0, l = roles[role].length; i < l; i++) {
-        const r = roles[role][i]
+    for(let i = 0, l = role.length; i < l; i++) {
+      const item = role[i]
 
-        if(r.canDo == action) {
+      if(roles[item]) {
 
-          if(r.when) {
-            result = await r.when(options)
+        for(let j = 0, k = roles[item].length; j < k; j++) {
+          const r = roles[item][j]
+
+          if(r.canDo == action) {
+
+            if(r.when) {
+              result = await r.when(options)
+            }
+
+            else {
+              result = true
+            }
+
           }
-
-          else {
-            result = true
-          }
-
         }
+
       }
 
     }

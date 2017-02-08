@@ -76,6 +76,22 @@ describe('Role Check', function() {
 
   })
 
+  it('should check an multi-inherited role with action via a list of roles', async function() {
+
+    const rbac = new RBAC({
+      rules: [
+        {a: 'user', canDo: 'say hello'},
+        {a: 'editor', canBe: 'user'},
+        {a: 'admin', canBe: 'editor'}
+      ]
+    })
+
+    const res = await rbac.check(['user', 'admin'], 'say hello')
+
+    expect(res).to.be.true
+
+  })
+
   it('should check a role with conditional action', async function() {
 
     const rbac = new RBAC({
