@@ -1,6 +1,6 @@
 {
   "name": "structure-hrbac",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Hierarchical Role-based Access Control",
   "main": "dist/index.js",
   "directories": {
