@@ -1,12 +1,14 @@
 {
   "name": "structure-hrbac",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Hierarchical Role-based Access Control",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "compile": "node_modules/.bin/babel src -d dist -D -s",
+    "prepublish": "npm run compile",
     "test": "gulp t"
   },
   "repository": {
