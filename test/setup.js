@@ -1,31 +1,42 @@
 process.on('uncaughtException', function(err) {
-  if(err && err.stack) {
-    console.error(err.message)
-    console.error(err.stack)
-  } else {
-    console.error(err)
-  }
+  console.error(err)
 })
 
 process.on('unhandledRejection', function(err) {
-  console.error('Unhandled Rejection')
-  if(err && err.stack) {
-    console.error(err.message)
-    console.error(err.stack)
-  } else {
-    console.error(err)
-  }
-
+  console.error(err)
 })
 
-require('babel-core/register')
-require('babel-polyfill')
+const chai = require('chai')
 
-var chai  = require('chai'),
-    sinon = require('sinon'),
-    sinonChai = require('sinon-chai')
+/*
+NOTE: https://gist.github.com/pahund/3abcc5212431cef3dae455d5285b7bd7
+*/
 
-chai.use(sinonChai)
+// Make sure chai and jasmine ".not" play nice together
+const originalNot = Object.getOwnPropertyDescriptor(chai.Assertion.prototype, 'not').get
+Object.defineProperty(chai.Assertion.prototype, 'not', {
+  get() {
+    Object.assign(this, this.assignedNot)
+    return originalNot.apply(this)
+  },
+  set(newNot) {
+    this.assignedNot = newNot
+    return newNot
+  }
+})
 
-global.expect = chai.expect
-global.sinon  = sinon
+// Combine both jest and chai matchers on expect
+const jestExpect = global.expect
+global.chaiExpect = chai.expect
+
+global.expect = actual => {
+  const originalMatchers = jestExpect(actual)
+  const chaiMatchers = chai.expect(actual)
+  const combinedMatchers = Object.assign(chaiMatchers, originalMatchers)
+
+  return combinedMatchers
+}
+
+Object.keys(jestExpect).forEach(
+  key => (global.expect[key] = jestExpect[key])
+)

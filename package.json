@@ -1,19 +1,17 @@
 {
-  "name": "structure-hrbac",
-  "version": "0.0.5",
+  "name": "hrbac-core",
+  "version": "0.1.0",
   "description": "Hierarchical Role-based Access Control",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "compile": "node_modules/.bin/babel src -d dist -D -s",
-    "prepublish": "npm run compile",
-    "test": "gulp t"
+    "test": "jest --config=jest.config.js --detectOpenHandles"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/f12/rbac.git"
+    "url": "git+https://github.com/chrisabrams/hrbac.git"
   },
   "keywords": [
     "rbac",
@@ -22,26 +20,18 @@
   "author": "Chris Abrams <mail@chrisabrams.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/f12/rbac/issues"
+    "url": "https://github.com/chrisabrams/hrbac/issues"
   },
-  "homepage": "https://github.com/f12/rbac#readme",
+  "homepage": "https://github.com/chrisabrams/hrbac#readme",
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
-    "babel-eslint": "^7.1.1",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-es2017": "^6.22.0",
-    "babel-runtime": "^6.18.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.15.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^3.0.1",
-    "mocha": "^3.1.2",
-    "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "@types/chai": "^4.1.7",
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.9",
+    "chai": "^4.2.0",
+    "jest": "^23.6.0",
+    "jest-environment-node": "^23.4.0",
+    "ts-jest": "^23.10.4",
+    "typescript": "^3.1.6"
   }
 }

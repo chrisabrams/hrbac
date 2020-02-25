@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import RBAC from '../../src/index'
 
 describe('Role Check', function() {
@@ -126,9 +127,13 @@ describe('Role Check', function() {
 
   it('should check a role with conditional action and parameters', async function() {
 
+    interface Params {
+      world: boolean
+    }
+
     const rbac = new RBAC({
       rules: [
-        {a: 'user', canDo: 'say hello', when: function sayHelloWhen(params = {}) {
+        {a: 'user', canDo: 'say hello', when: async function sayHelloWhen(params: Params) {
           return params.world
         }}
       ]
@@ -142,9 +147,13 @@ describe('Role Check', function() {
 
   it('should fail check a role with conditional action and parameters', async function() {
 
+    interface Params {
+      world: boolean
+    }
+
     const rbac = new RBAC({
       rules: [
-        {a: 'user', canDo: 'say hello', when: function sayHelloWhen(params = {}) {
+        {a: 'user', canDo: 'say hello', when: async function sayHelloWhen(params: Params) {
           return params.world
         }}
       ]
